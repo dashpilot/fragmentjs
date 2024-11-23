@@ -1,4 +1,4 @@
-# Fragment, SPA-like navigation without the need for a SPA ...or a server.
+# Fragment.js, SPA-like navigation without the need for a SPA ...or a server.
 
 `Fragment` is a JavaScript utility designed to enhance web pages with Single Page Application (SPA)-like behavior. It intercepts link clicks on elements with the `data-fragment` attribute, fetches the content from the specified URL, and updates a specific part of the page without reloading AND without the need to render different versions of a page. Fragment automatically extracts just the part that needs to be replaced.
 
@@ -49,7 +49,7 @@ document.addEventListener('fragment:loaded', function (e) {
 ## Demo
 
 To see Fragment in action, visite the demo:
-https://fragment-pi.vercel.app/
+https://fragmentjs.vercel.app/
 
 ## Press the :star: button
 
