@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Fragment - SPA-like behaviour for static sites</title>
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <div class="layout">
+            <nav class="sidebar">
+                <div class="logo">Fragment</div>
+                <ul class="nav-list">
+                    <li class="nav-item"><a data-fragment="main" href="./" class="nav-link">Introduction</a></li>
+                    <li class="nav-item"><a data-fragment="main" href="installation.html" class="nav-link">Installation</a></li>
+                    <li class="nav-item"><a data-fragment="main" href="usage.html" class="nav-link">Usage</a></li>
+                </ul>
+            </nav>
+
+            <main class="content" id="main">
+                <section id="installation">
+                    <h2>Installation</h2>
+                    <p>Download the zip, and add fragment.min.js to your page</p>
+                    <pre><code>&lt;script src="fragment.min.js"&gt;&lt;/script&gt;</code></pre>
+                    <p>Or use the hosted version</p>
+                    <pre><code>&lt;script src="https://fragment-pi.vercel.app/fragment.min.js"&gt;&lt;/script&gt;</code></pre>
+                </section>
+            </main>
+        </div>
+
+        <script src="fragment.min.js"></script>
+    </body>
+</html>

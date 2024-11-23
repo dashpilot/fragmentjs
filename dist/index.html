@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Fragment - SPA-like behaviour for static sites</title>
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <div class="layout">
+            <nav class="sidebar">
+                <div class="logo">Fragment</div>
+                <ul class="nav-list">
+                    <li class="nav-item"><a data-fragment="main" href="./" class="nav-link">Introduction</a></li>
+                    <li class="nav-item"><a data-fragment="main" href="installation.html" class="nav-link">Installation</a></li>
+                    <li class="nav-item"><a data-fragment="main" href="usage.html" class="nav-link">Usage</a></li>
+                </ul>
+            </nav>
+
+            <main class="content" id="main">
+                <h1>Fragment Documentation</h1>
+
+                <section id="introduction">
+                    <h2>Introduction</h2>
+                    <p>`Fragment` is a JavaScript utility designed to enhance web pages with Single Page Application (SPA)-like behavior. It intercepts link clicks on elements with the `data-fragment` attribute, fetches the content from the specified URL, and updates a specific part of the page without reloading AND without the need to render different versions of a page. Fragment automatically extracts just the part that needs to be replaced.</p>
+
+                    <h2>But why...? we already have HTMX!</h2>
+
+                    <p>Although I love and use HTMX, it has one big downside: you need a SERVER to generate the HTMX fragment that gets replaced. Which makes it unsuitable for static sites or content loaded via a CDN.</p>
+
+                    <p>Another 'downside' of HTMX is that links lose their `href` attribute in favour of `hx-get`. This is by design, but it makes your html less semantic (with possible SEO consequences). Fragment-links degrade gracefuly to their default behavior, even when javascript is disabled.</p>
+
+                    <h2>Features</h2>
+                    <p>
+                        <ul>
+                            <li><strong>Dynamic Content Loading</strong>: Fetches and updates content for a specified fragment ID from the clicked link's URL.</li>
+                            <li><strong>Active Link Highlighting</strong>: Manages active state for links with the <code>data-fragment</code> attribute.</li>
+                            <li><strong>Browser History Management</strong>: Updates the URL in the address bar and the browser's history stack.</li>
+                            <li><strong>Title Update</strong>: Extracts and updates the document title from the fetched content.</li>
+                            <li><strong>Custom Event Emission</strong>: Emits a <code>fragment:loaded</code> event after content is loaded and the URL is updated, allowing for additional custom logic.</li>
+                        </ul>
+                    </p>
+                </section>
+            </main>
+        </div>
+
+        <script src="fragment.min.js"></script>
+    </body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Fragment - SPA-like behaviour for static sites</title>
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <div class="layout">
+            <nav class="sidebar">
+                <div class="logo">Fragment</div>
+                <ul class="nav-list">
+                    <li class="nav-item"><a data-fragment="main" href="./" class="nav-link">Introduction</a></li>
+                    <li class="nav-item"><a data-fragment="main" href="installation.html" class="nav-link">Installation</a></li>
+                    <li class="nav-item"><a data-fragment="main" href="usage.html" class="nav-link">Usage</a></li>
+                </ul>
+            </nav>
+
+            <main class="content" id="main">
+                <section id="usage">
+                    <h2>Usage</h2>
+                    <p>Ensure your links have the `data-fragment` attribute and point to the desired URL. The value of `data-fragment` is the id of the element that will be replaced.</p>
+                    <pre><code>&lt;a href="page1.html" data-fragment="main"&gt;Page 1&lt;/a&gt;
+&lt;a href="page2.html" data-fragment="main"&gt;Page 2&lt;/a&gt;
+
+&lt;div id="main"&gt;
+    &lt;!-- Content will be dynamically loaded here --&gt;
+&lt;/div&gt;
+</code></pre>
+
+                    You can also take a look at the source of this page, because the menu on the left uses Fragment :-)
+                </section>
+            </main>
+        </div>
+
+        <script src="fragment.min.js"></script>
+    </body>
+</html>

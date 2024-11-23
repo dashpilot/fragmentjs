@@ -1,0 +1,14 @@
+{
+    "name": "fragment",
+    "version": "1.0.0",
+    "description": "The `fragment` function is a JavaScript utility designed to enhance web pages with Single Page Application (SPA)-like behavior. It intercepts link clicks on elements with the `data-fragment` attribute, fetches the content from the specified URL, and updates a specific part of the page without reloading. Additionally, it updates the browser's history and document title, and emits a custom event for further integration.",
+    "main": "index.js",
+    "scripts": {
+        "build": "terser src/fragment.js -o dist/fragment.min.js --compress --mangle"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "terser": "^5.36.0"
+    }
+}
