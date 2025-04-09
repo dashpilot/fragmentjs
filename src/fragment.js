@@ -1,28 +1,31 @@
 // Function to intercept link clicks and load content
 function fragment() {
-    document.querySelectorAll('a[data-fragment]').forEach(function (link) {
-        link.addEventListener('click', function (event) {
-            event.preventDefault(); // Prevent the default link behavior
+    // Use event delegation for handling clicks on fragment links
+    document.addEventListener('click', function (event) {
+        // Find the closest anchor with data-fragment attribute
+        const link = event.target.closest('a[data-fragment]');
+        if (!link) return; // Not a fragment link
 
-            var url = link.getAttribute('href');
-            var fragmentId = link.getAttribute('data-fragment');
+        event.preventDefault(); // Prevent the default link behavior
 
-            document.querySelectorAll('a[data-fragment]').forEach(function (link) {
-                link.classList.remove('active-fragment');
-            });
-            link.classList.add('active-fragment');
+        var url = link.getAttribute('href');
+        var fragmentId = link.getAttribute('data-fragment');
 
-            // Store state information that we'll need when navigating back
-            const state = {
-                url: url,
-                fragmentId: fragmentId,
-            };
-
-            // Push the new URL to the browser's history with state information
-            history.pushState(state, '', url);
-
-            loadFragment(url, fragmentId);
+        document.querySelectorAll('a[data-fragment]').forEach(function (link) {
+            link.classList.remove('active-fragment');
         });
+        link.classList.add('active-fragment');
+
+        // Store state information that we'll need when navigating back
+        const state = {
+            url: url,
+            fragmentId: fragmentId,
+        };
+
+        // Push the new URL to the browser's history with state information
+        history.pushState(state, '', url);
+
+        loadFragment(url, fragmentId);
     });
 
     // Handle browser back/forward navigation
@@ -51,14 +54,26 @@ function loadFragment(url, fragmentId) {
             tempDiv.innerHTML = html;
 
             // Extract the content of the specified fragment ID
-            var newContent = tempDiv.querySelector(`#${fragmentId}`).innerHTML;
+            var fragmentElement = tempDiv.querySelector(`#${fragmentId}`);
+            if (!fragmentElement) {
+                console.error(`Fragment #${fragmentId} not found in the fetched page`);
+                return;
+            }
+            var newContent = fragmentElement.innerHTML;
 
             // Update the specified fragment ID on the current page
-            document.querySelector(`#${fragmentId}`).innerHTML = newContent;
+            var targetElement = document.querySelector(`#${fragmentId}`);
+            if (!targetElement) {
+                console.error(`Target element #${fragmentId} not found on the current page`);
+                return;
+            }
+            targetElement.innerHTML = newContent;
 
             // Extract and update the document title
-            var newTitle = tempDiv.querySelector('title').innerText;
-            document.title = newTitle;
+            var titleElement = tempDiv.querySelector('title');
+            if (titleElement) {
+                document.title = titleElement.innerText;
+            }
 
             // Smooth scroll to the top of the page
             window.scrollTo({
