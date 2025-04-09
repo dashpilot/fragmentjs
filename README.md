@@ -13,6 +13,7 @@ Another 'downside' of HTMX is that links lose their `href` attribute in favour o
 -   **Dynamic Content Loading**: Fetches and updates content for a specified fragment ID from the clicked link's URL.
 -   **Active Link Highlighting**: Manages active state for links with the `data-fragment` attribute.
 -   **Browser History Management**: Updates the URL in the address bar and the browser's history stack.
+-   **Preload on hover**: To speed up page-loads even more, each link is preloaded on hover.
 -   **Title Update**: Extracts and updates the document title from the fetched content.
 -   **Custom Event Emission**: Emits a `fragment:loaded` event after content is loaded and the URL is updated, allowing for additional custom logic.
 
