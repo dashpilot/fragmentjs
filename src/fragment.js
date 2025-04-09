@@ -12,13 +12,37 @@ function fragment() {
             });
             link.classList.add('active-fragment');
 
-            runFragment(url, fragmentId);
+            // Store state information that we'll need when navigating back
+            const state = {
+                url: url,
+                fragmentId: fragmentId,
+            };
+
+            // Push the new URL to the browser's history with state information
+            history.pushState(state, '', url);
+
+            loadFragment(url, fragmentId);
         });
+    });
+
+    // Handle browser back/forward navigation
+    window.addEventListener('popstate', function (event) {
+        if (event.state && event.state.url && event.state.fragmentId) {
+            loadFragment(event.state.url, event.state.fragmentId);
+
+            // Update active link when navigating with browser controls
+            document.querySelectorAll('a[data-fragment]').forEach(function (link) {
+                link.classList.remove('active-fragment');
+                if (link.getAttribute('href') === event.state.url) {
+                    link.classList.add('active-fragment');
+                }
+            });
+        }
     });
 }
 
-// Run fragment manually
-function runFragment(url, fragmentId) {
+// Load fragment content
+function loadFragment(url, fragmentId) {
     fetch(url)
         .then((response) => response.text())
         .then((html) => {
@@ -36,9 +60,6 @@ function runFragment(url, fragmentId) {
             var newTitle = tempDiv.querySelector('title').innerText;
             document.title = newTitle;
 
-            // Push the new URL to the browser's history
-            history.pushState(null, '', url);
-
             // Smooth scroll to the top of the page
             window.scrollTo({
                 top: 0,
@@ -50,6 +71,29 @@ function runFragment(url, fragmentId) {
             document.dispatchEvent(event);
         })
         .catch((error) => console.error('Error fetching the fragment:', error));
+}
+
+// Run fragment manually (public function for external use)
+function runFragment(url, fragmentId) {
+    // Store state information
+    const state = {
+        url: url,
+        fragmentId: fragmentId,
+    };
+
+    // Update the history
+    history.pushState(state, '', url);
+
+    // Update active link
+    document.querySelectorAll('a[data-fragment]').forEach(function (link) {
+        link.classList.remove('active-fragment');
+        if (link.getAttribute('href') === url) {
+            link.classList.add('active-fragment');
+        }
+    });
+
+    // Load the fragment content
+    loadFragment(url, fragmentId);
 }
 
 // Call the function to set up the link interception
